@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <h1>Books</h1>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-book" [routerLink]="['/book/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Book
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="books">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="publicationDate"><span>Publication Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="price"><span>Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="bookCover"><span>Book Cover</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="genre"><span>Genre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="isBestSeller"><span>Is Best Seller</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="author.name"><span>Author</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="publisher.name"><span>Publisher</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let book of books ;trackBy: trackId">
+                <td><a [routerLink]="['/book', book.id, 'view' ]">{{book.title}}</a></td>
+                <td>{{book.publicationDate | date:'mediumDate'}}</td>
+                <td>{{book.price}}$</td>
+                <td>{{book.bookCover}}</td>
+                <td>{{book.genre}}</td>
+                <td>
+                    <a *ngIf="book.isBestSeller">
+                        Best Seller
+                    </a>
+                </td>
+                <td>
+                    <a *ngIf="book.image" (click)="openFile(book.imageContentType, book.image)">
+                        <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-height: 30px;" alt="book image"/>
+                    </a>
+                </td>
+                <td>
+                    <div *ngIf="book.author">
+                        <a [routerLink]="['/author', book.author?.id, 'view' ]" >{{book.author?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="book.publisher">
+                        <a [routerLink]="['/publisher', book.publisher?.id, 'view' ]" >{{book.publisher?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/book', book.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', 'book', { outlets: { popup: book.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

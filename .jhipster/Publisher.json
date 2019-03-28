@@ -1,0 +1,38 @@
+{
+    "name": "Publisher",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "distribution",
+            "fieldType": "Distribution",
+            "fieldValues": "WORLDWIDE,REGIONAL"
+        },
+        {
+            "fieldName": "localization",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "book",
+            "otherEntityName": "book",
+            "otherEntityRelationshipName": "publisher"
+        }
+    ],
+    "changelogDate": "20190328124151",
+    "entityTableName": "publisher",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

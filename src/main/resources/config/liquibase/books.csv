@@ -1,0 +1,16 @@
+id;title;description;publication_date;price;book_cover;genre;is_best_seller;image;image_content_type;author_id;publisher_id
+1;1984;It´s about an orwellian world in London in 1984;1949-06-08;20;SOFT;POLICY;true;;;1;1
+2;Hombres buenos;It narrates the adventures of two Spaniards sent to France by the Real Academia Española de la Lengua at the end of the 18th century, with the aim of acquiring the 28 volumes of L'Encyclopédie.;2015-01-01;15;SOFT;SCIENCEFICTION;false;;;2;2
+3;Animal Farm;A scathing fable about how Yosif Stalin's Soviet regime corrupts socialism;1945-08-17;18;HARD;SCIENCEFICTION;true;;;1;3
+4;El capitán Alatriste;It´s about the adventures of the main character, Diego Alatriste and Tenorio, along with his page Íñigo Balboa.;1996-01-01;23;HARD;ADVENTURE;true;;;2;1
+5;El corazón helado;During the burial of his father, a powerful businessman, Álvaro Carrión sees in the distance a strange woman he has never seen.;2007-01-01;19;SOFT;THRILLER;false;;;3;2
+6;Game of thrones;It narrates the competition between noble families from seven kingdoms of Westeros, whose purpose is to gain control over the Iron Throne.;1996-08-01;18;HARD;SCIENCEFICTION;true;;;4;3
+7;A Song for Lya;Robb and Lyanna are a couple of telepaths hired to investigate the reason behind the conversion of several humans to the religion of the planet Shkae;1974-01-01;13;SOFT;SCIENCEFICTION;false;;;4;3
+8;Inés y la alegría;It narrates significant moments of the anti-Franco resistance in a period between 1939 and 1964.;2010-01-01;17;SOFT;SOCIETY;false;;;3;1
+9;Homage to Catalonia;Is George Orwell's personal account of his experience during the Spanish Civil War.;1938-05-25;18;HARD;OTHER;false;;;1;4
+10;Harry Potter and the Philosopher's Stone;Adventures of young magic and sorcery apprentice Harry Potter and his friends Hermione Granger and Ron Weasley;1997-06-30;15;HARD;SCIENCEFICTION;true;;;5;5
+11;Harry Potter and the Chamber of Secrets;Adventures of young magic and sorcery apprentice Harry Potter and his friends Hermione Granger and Ron Weasley;1998-07-02;12;HARD;SCIENCEFICTION;true;;;5;5
+12;Harry Potter and the Prisoner of Azkaban;Adventures of young magic and sorcery apprentice Harry Potter and his friends Hermione Granger and Ron Weasley;1999-07-08;16;HARD;SCIENCEFICTION;true;;;5;5
+13;La piel del tambor;A hacker breaks into the Pope's personal computer and warns that a series of deaths are taking place in a small church in Seville.;1995-01-01;20;SOFT;THRILLER;false;;;2;2
+14;Sandkings;The story of Simon Kress, an important businessman from a planet other than Earth.;1979-08-01;25;HARD;SCARY;true;;;4;4
+15;Castillos de cartón;María José Sánchez works as an art appraiser in a Madrid auction house. One day she receives a call from an old friend and lover, Jaime González, announcing that his common friend, the famous painter Molina Schulz, has committed suicide.;2004-01-01;18;SOFT;OTHER;false;;;3;1

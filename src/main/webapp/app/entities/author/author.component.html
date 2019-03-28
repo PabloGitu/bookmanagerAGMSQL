@@ -1,0 +1,60 @@
+<div>
+    <h2 id="page-heading">
+        <h1>Authors</h1>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-author" [routerLink]="['/author/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Author
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="authors">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="genre"><span>Genre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="birthdate"><span>Birthdate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="deathDate"><span>Death Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="country"><span>Country</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let author of authors ;trackBy: trackId">
+                <td><a [routerLink]="['/author', author.id, 'view' ]">{{author.name}}</a></td>
+                <td>{{author.genre}}</td>
+                <td>{{author.birthdate | date:'mediumDate'}}</td>
+                <td>{{author.deathDate | date:'mediumDate'}}</td>
+                <td>{{author.country}}</td>
+                <td>
+                    <a *ngIf="author.image" (click)="openFile(author.imageContentType, author.image)">
+                        <img [src]="'data:' + author.imageContentType + ';base64,' + author.image" style="max-height: 30px;" alt="author image"/>
+                    </a>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/author', author.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                [routerLink]="['/', 'author', { outlets: { popup: author.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

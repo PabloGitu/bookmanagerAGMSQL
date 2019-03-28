@@ -1,0 +1,158 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-book-heading">Create or edit a Book</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!book.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="book.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="book.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="book.description" required minlength="10"/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.minlength">
+                        This field is required to be at least 10 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_publicationDate">Publication Date</label>
+                    <div class="input-group">
+                        <input id="field_publicationDate" type="text" class="form-control" name="publicationDate" ngbDatepicker  #publicationDateDp="ngbDatepicker" [(ngModel)]="book.publicationDate"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="publicationDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.publicationDate?.dirty && editForm.controls.publicationDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.publicationDate?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                        [(ngModel)]="book.price" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bookCover">Book Cover</label>
+                    <select class="form-control" name="bookCover" [(ngModel)]="book.bookCover" id="field_bookCover"  required>
+                        <option value="SOFT">SOFT</option>
+                        <option value="HARD">HARD</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.bookCover?.dirty && editForm.controls.bookCover?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bookCover?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_genre">Genre</label>
+                    <select class="form-control" name="genre" [(ngModel)]="book.genre" id="field_genre"  required>
+                        <option value="THRILLER">THRILLER</option>
+                        <option value="ROMANTIC">ROMANTIC</option>
+                        <option value="ADVENTURE">ADVENTURE</option>
+                        <option value="SCARY">SCARY</option>
+                        <option value="SCIENCEFICTION">SCIENCEFICTION</option>
+                        <option value="CHILD">CHILD</option>
+                        <option value="POLICY">POLICY</option>
+                        <option value="SOCIETY">SOCIETY</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.genre?.dirty && editForm.controls.genre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.genre?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_isBestSeller">Is Best Seller</label>
+                    <input type="checkbox" class="form-control" name="isBestSeller" id="field_isBestSeller"
+                        [(ngModel)]="book.isBestSeller" />
+                    <div [hidden]="!(editForm.controls.isBestSeller?.dirty && editForm.controls.isBestSeller?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.isBestSeller?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-height: 100px;" *ngIf="book.image" alt="book image"/>
+                        <div *ngIf="book.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{book.imageContentType}}, {{byteSize(book.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, book, 'image', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="book.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="book.imageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_author">Author</label>
+                    <select class="form-control" id="field_author" name="author" [(ngModel)]="book.author"  required>
+                        <option *ngIf="!editForm.value.author" [ngValue]="null" selected></option>
+                        <option [ngValue]="authorOption.id === book.author?.id ? book.author : authorOption" *ngFor="let authorOption of authors; trackBy: trackAuthorById">{{authorOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.author?.dirty && editForm.controls.author?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.author?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_publisher">Publisher</label>
+                    <select class="form-control" id="field_publisher" name="publisher" [(ngModel)]="book.publisher"  required>
+                        <option *ngIf="!editForm.value.publisher" [ngValue]="null" selected></option>
+                        <option [ngValue]="publisherOption.id === book.publisher?.id ? book.publisher : publisherOption" *ngFor="let publisherOption of publishers; trackBy: trackPublisherById">{{publisherOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.publisher?.dirty && editForm.controls.publisher?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.publisher?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

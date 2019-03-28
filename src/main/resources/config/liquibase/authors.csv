@@ -1,0 +1,6 @@
+id;name;genre;birthdate;death_date;country;image;image_content_type
+1;George Orwell;MALE;1903-06-25;1950-01-21;England;;
+2;Arturo Perez Reverte;MALE;1951-11-25;null;Spain;;
+3;Almudena Grandes;FEMALE;1960-05-07;null;Spain;;
+4;George R. R. Martin;MALE;1948-09-20;null;United States;;
+5;J. K. Rowling;FEMALE;1965-07-31;null;England;;

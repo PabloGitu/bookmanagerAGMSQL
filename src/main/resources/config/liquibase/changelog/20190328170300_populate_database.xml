@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="20190224183100-1" author="pablo">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/authors.csv"
+                  separator=";"
+                  tableName="author"/>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/publishers.csv"
+                  separator=";"
+                  tableName="publisher"/>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/books.csv"
+                  separator=";"
+                  tableName="book">
+            <column name="is_best_seller" type="boolean"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/comments.csv"
+                  separator=";"
+                  tableName="comment"/>
+    </changeSet>
+</databaseChangeLog>

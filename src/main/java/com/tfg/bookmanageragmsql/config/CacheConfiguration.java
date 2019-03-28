@@ -38,6 +38,13 @@ public class CacheConfiguration {
             cm.createCache(com.tfg.bookmanageragmsql.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.tfg.bookmanageragmsql.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.tfg.bookmanageragmsql.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Author.class.getName(), jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Author.class.getName() + ".books", jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Book.class.getName(), jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Book.class.getName() + ".comments", jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Comment.class.getName(), jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Publisher.class.getName(), jcacheConfiguration);
+            cm.createCache(com.tfg.bookmanageragmsql.domain.Publisher.class.getName() + ".books", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
