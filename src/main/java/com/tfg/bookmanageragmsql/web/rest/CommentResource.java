@@ -1,6 +1,7 @@
 package com.tfg.bookmanageragmsql.web.rest;
 import com.tfg.bookmanageragmsql.domain.Comment;
 import com.tfg.bookmanageragmsql.repository.UserRepository;
+import com.tfg.bookmanageragmsql.security.SecurityUtils;
 import com.tfg.bookmanageragmsql.service.CommentService;
 import com.tfg.bookmanageragmsql.web.rest.errors.BadRequestAlertException;
 import com.tfg.bookmanageragmsql.web.rest.util.HeaderUtil;
@@ -73,10 +74,12 @@ public class CommentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/comments")
-    public ResponseEntity<Comment> updateComment(@Valid @RequestBody Comment comment) throws URISyntaxException {
+    public ResponseEntity<?> updateComment(@Valid @RequestBody Comment comment) throws URISyntaxException {
         log.debug("REST request to update Comment : {}", comment);
         if (comment.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        } else if (!comment.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(""))) {
+            return new ResponseEntity<>("error.http.403", HttpStatus.FORBIDDEN);
         }
         Comment result = commentService.save(comment);
         return ResponseEntity.ok()
