@@ -14,13 +14,13 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="publicationDate"><span>Publication Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="price"><span>Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="bookCover"><span>Book Cover</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="genre"><span>Genre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="isBestSeller"><span>Is Best Seller</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="author.name"><span>Author</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="publisher.name"><span>Publisher</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th></th>
@@ -28,6 +28,11 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let book of books ;trackBy: trackId">
+                <td>
+                    <a *ngIf="book.image" (click)="openFile(book.imageContentType, book.image)">
+                        <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-height: 100px;" alt="book image"/>
+                    </a>
+                </td>
                 <td><a [routerLink]="['/book', book.id, 'view' ]">{{book.title}}</a></td>
                 <td>{{book.publicationDate | date:'mediumDate'}}</td>
                 <td>{{book.price}}$</td>
@@ -36,11 +41,6 @@
                 <td>
                     <a *ngIf="book.isBestSeller">
                         Best Seller
-                    </a>
-                </td>
-                <td>
-                    <a *ngIf="book.image" (click)="openFile(book.imageContentType, book.image)">
-                        <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-height: 30px;" alt="book image"/>
                     </a>
                 </td>
                 <td>

@@ -4,6 +4,17 @@
             <h1>{{book.title}}<a *ngIf="book.isBestSeller">  *Best Seller*</a></h1>
             <hr>
             <jhi-alert-error></jhi-alert-error>
+            <div class="row">
+            <div *ngIf="book.image" class="col-4">
+                <dd>
+                    <div *ngIf="book.image">
+                        <a (click)="openFile(book.imageContentType, book.image)">
+                            <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-width: 100%;" alt="book image"/>
+                        </a>
+                    </div>
+                </dd>
+            </div>
+            <div class="col-4">
             <dl class="row-md jh-entity-details">
                 <dt><span>Description</span></dt>
                 <dd>
@@ -25,19 +36,6 @@
                 <dd>
                     <span>{{book.genre}}</span>
                 </dd>
-                <div *ngIf="book.image">
-                    <dt><span>Image</span></dt>
-                    <dd>
-                        <div *ngIf="book.image">
-                            <a (click)="openFile(book.imageContentType, book.image)">
-                                <img [src]="'data:' + book.imageContentType + ';base64,' + book.image" style="max-width: 100%;" alt="book image"/>
-                            </a>
-                        </div>
-                    </dd>
-                </div>
-                <div>
-                    <a [routerLink]="['/comment/book/' + book.id ]" >Comments of {{book.title}}</a>
-                </div>
                 <dt><span>Author</span></dt>
                 <dd>
                     <div *ngIf="book.author">
@@ -50,8 +48,12 @@
                         <a [routerLink]="['/publisher', book.publisher?.id, 'view']">{{book.publisher?.name}}</a>
                     </div>
                 </dd>
+                <div>
+                    <a [routerLink]="['/comment/book/' + book.id ]" >See the user's comments of {{book.title}}</a>
+                </div>
             </dl>
-
+            </div>
+            </div>
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">

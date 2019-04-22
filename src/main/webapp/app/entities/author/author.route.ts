@@ -57,7 +57,7 @@ export const authorRoute: Routes = [
             author: AuthorResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Authors'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const authorRoute: Routes = [
             author: AuthorResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Authors'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const authorPopupRoute: Routes = [
             author: AuthorResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Authors'
         },
         canActivate: [UserRouteAccessService],

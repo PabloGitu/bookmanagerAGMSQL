@@ -14,27 +14,27 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="genre"><span>Genre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="birthdate"><span>Birthdate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="deathDate"><span>Death Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="country"><span>Country</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let author of authors ;trackBy: trackId">
+                <td>
+                    <a *ngIf="author.image" (click)="openFile(author.imageContentType, author.image)">
+                        <img [src]="'data:' + author.imageContentType + ';base64,' + author.image" style="max-height: 100px;" class="rounded-circle" alt="author image"/>
+                    </a>
+                </td>
                 <td><a [routerLink]="['/author', author.id, 'view' ]">{{author.name}}</a></td>
                 <td>{{author.genre}}</td>
                 <td>{{author.birthdate | date:'mediumDate'}}</td>
                 <td>{{author.deathDate | date:'mediumDate'}}</td>
                 <td>{{author.country}}</td>
-                <td>
-                    <a *ngIf="author.image" (click)="openFile(author.imageContentType, author.image)">
-                        <img [src]="'data:' + author.imageContentType + ';base64,' + author.image" style="max-height: 30px;" alt="author image"/>
-                    </a>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
