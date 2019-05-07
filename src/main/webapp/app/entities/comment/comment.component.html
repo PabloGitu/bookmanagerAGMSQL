@@ -14,7 +14,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span>Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="book.title"><span>Book</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -23,7 +22,6 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let comment of comments ;trackBy: trackId">
-                <td><a [routerLink]="['/comment', comment.id, 'view' ]">{{comment.id}}</a></td>
                 <td>{{comment.description}}</td>
                 <td>
                     {{comment.user?.login}}

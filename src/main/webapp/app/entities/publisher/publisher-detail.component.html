@@ -17,9 +17,6 @@
                 <dd>
                     <span>{{publisher.localization}}</span>
                 </dd>
-                <div>
-                    <a [routerLink]="['/book/publisher/' + publisher.id ]" >Books of {{publisher.name}}</a>
-                </div>
             </dl>
 
             <button type="submit"
@@ -32,6 +29,10 @@
                     [routerLink]="['/publisher', publisher.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+            <button type="button" class="btn btn-primary"
+                    [routerLink]="['/book/publisher/' + publisher.id ]">
+                <i class="fas fa-book"></i>&nbsp;<span> Books published by {{publisher.name}}</span>
             </button>
         </div>
     </div>

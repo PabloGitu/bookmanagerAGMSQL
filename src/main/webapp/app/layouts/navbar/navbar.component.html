@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <nav class="navbar navbar-dark navbar-expand-md bg-dark">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
@@ -29,26 +30,26 @@
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
                     <li>
                         <a *ngSwitchCase="true" class="dropdown-item" routerLink="author" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Author</span>
+                            <i class="fas fa-user-edit"></i>
+                            <span>Authors</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="book" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Book</span>
+                            <i class="fas fa-book"></i>
+                            <span>Books</span>
                         </a>
                     </li>
                     <li>
                         <a *ngSwitchCase="true" class="dropdown-item" routerLink="comment" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Comment</span>
+                            <i class="fas fa-comment"></i>
+                            <span>Comments</span>
                         </a>
                     </li>
                     <li>
                         <a *ngSwitchCase="true" class="dropdown-item" routerLink="publisher" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Publisher</span>
+                            <i class="fas fa-building"></i>
+                            <span>Publishers</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
